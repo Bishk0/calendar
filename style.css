@@ -1,0 +1,40 @@
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+.calendar {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.calendar__header {
+  font-size: 32px;
+  font-weight: 600;
+  color: darkmagenta;
+  display: flex;
+  justify-content: center;
+  /* border: 1px solid silver; */
+}
+
+table {
+  /* border: 1px solid gray; */
+  text-align: center;
+  cursor: default;
+}
+
+td, th {
+  /* border: 1px solid magenta; */
+  width: 40px;
+  height: 40px;
+}
+
+td {
+  font-size: 18px;
+}
+
+th {
+  border-bottom: 1px solid silver;
+}
