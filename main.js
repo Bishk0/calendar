@@ -1,15 +1,18 @@
 let today = new Date();
 let currentMonth = today.getMonth();
 let currentYear = today.getFullYear();
+let currentDay = today.getDate();
+
 
 const calendar = document.querySelector(".calendar__body");
 const table = document.createElement("table");
 calendar.append(table);
-let monthAndYear = document.querySelector(".monthAndYear");
+const monthAndYear = document.querySelector(".monthAndYear");
+const currentDate = document.querySelector(".date");
 
-const days = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
+const daysEng = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
 const daysUa = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Нд"];
-const months = [
+const monthsEng = [
   "JAN",
   "FEB",
   "MAR",
@@ -35,18 +38,35 @@ const monthsUa = [
   "Вересень",
   "Жовтень",
   "Листопад",
-  "Грудень",
+  "Грудень"
+];
+
+const months = [
+  "Січня",
+  "Лютого",
+  "Березня",
+  "Квітня",
+  "Травня",
+  "Червня",
+  "Липня",
+  "Серпня",
+  "Вересня",
+  "Жовтня",
+  "Листопада",
+  "Грудня"
 ];
 
 function clock() {
   let date = new Date();
- let hours = (date.getHours() < 10) ? '0' + date.getHours() : date.getHours();
- let minutes = (date.getMinutes() < 10) ? '0' + date.getMinutes() : date.getMinutes();
- let seconds = (date.getSeconds() < 10) ? '0' + date.getSeconds() : date.getSeconds();
- document.querySelector(".time").innerHTML = hours + ':' + minutes + ':' + seconds;
+ let hours = (date.getHours() < 10) ? "0" + date.getHours() : date.getHours();
+ let minutes = (date.getMinutes() < 10) ? "0" + date.getMinutes() : date.getMinutes();
+ let seconds = (date.getSeconds() < 10) ? "0" + date.getSeconds() : date.getSeconds();
+ document.querySelector(".time").innerHTML = hours + ":" + minutes + ":" + seconds;
 }
 setInterval(clock, 1000);
 clock();
+
+currentDate.innerHTML = currentDay + " " + months[currentMonth] + " " + currentYear + " р.";
 
 showCalendar(currentMonth, currentYear);
 
