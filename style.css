@@ -4,6 +4,14 @@ a {
 a:hover {
   text-decoration: none;
 }
+
+.date_time {
+  text-align: center;
+}
+.time {
+  font-size: 42px;
+}
+
 .calendar {
   display: flex;
   align-items: center;

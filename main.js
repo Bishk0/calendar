@@ -38,6 +38,16 @@ const monthsUa = [
   "Грудень",
 ];
 
+function clock() {
+  let date = new Date();
+ let hours = (date.getHours() < 10) ? '0' + date.getHours() : date.getHours();
+ let minutes = (date.getMinutes() < 10) ? '0' + date.getMinutes() : date.getMinutes();
+ let seconds = (date.getSeconds() < 10) ? '0' + date.getSeconds() : date.getSeconds();
+ document.querySelector(".time").innerHTML = hours + ':' + minutes + ':' + seconds;
+}
+setInterval(clock, 1000);
+clock();
+
 showCalendar(currentMonth, currentYear);
 
 function previous() {
@@ -100,22 +110,20 @@ function showCalendar(month, year) {
         }
         cell.append(cellText);
         row.append(cell);
-        
+
         date++;
       }
-     
+
       let startNextMonth = new Date(year, month + 2, 1).getDate();
       cellText = document.createTextNode(startNextMonth);
-    
+
       if (date > new Date(year, month + 1, 0).getDate()) {
         date = 1;
+      }
 
-      } 
-
-      if(i > 2 && date > 1 && date < 16) {
+      if (i > 2 && date > 1 && date < 16) {
         cell.classList.add("text-muted"); // styling days next month
       }
-    
     }
 
     table.append(row);
