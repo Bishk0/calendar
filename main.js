@@ -3,7 +3,6 @@ let currentMonth = today.getMonth();
 let currentYear = today.getFullYear();
 let currentDay = today.getDate();
 
-
 const calendar = document.querySelector(".calendar__body");
 const table = document.createElement("table");
 calendar.append(table);
@@ -38,7 +37,7 @@ const monthsUa = [
   "Вересень",
   "Жовтень",
   "Листопад",
-  "Грудень"
+  "Грудень",
 ];
 
 const months = [
@@ -53,20 +52,25 @@ const months = [
   "Вересня",
   "Жовтня",
   "Листопада",
-  "Грудня"
+  "Грудня",
 ];
 
 function clock() {
   let date = new Date();
- let hours = (date.getHours() < 10) ? "0" + date.getHours() : date.getHours();
- let minutes = (date.getMinutes() < 10) ? "0" + date.getMinutes() : date.getMinutes();
- let seconds = (date.getSeconds() < 10) ? "0" + date.getSeconds() : date.getSeconds();
- document.querySelector(".time").innerHTML = hours + ":" + minutes + ":" + seconds;
+  let hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+  let minutes =
+    date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+  let seconds =
+    date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+
+  document.querySelector(".time").innerHTML =
+    hours + ":" + minutes + ":" + seconds;
+
+  currentDate.innerHTML =
+    currentDay + " " + months[currentMonth] + " " + currentYear + " р.";
 }
 setInterval(clock, 1000);
 clock();
-
-currentDate.innerHTML = currentDay + " " + months[currentMonth] + " " + currentYear + " р.";
 
 showCalendar(currentMonth, currentYear);
 
@@ -105,11 +109,12 @@ function showCalendar(month, year) {
     table.appendChild(row);
   }
 
-  monthAndYear.innerHTML = monthsUa[month] + " " + year;
+  monthAndYear.innerHTML = monthsUa[month] + " " + year + " р.";
   // selectYear.value = year;
   // selectMonth.value = month;
 
   let date = 1;
+  let newDate = 1;
   for (let i = 0; i < 6; i++) {
     let row = document.createElement("tr");
     for (let j = 0; j < 7; j++) {
@@ -128,22 +133,43 @@ function showCalendar(month, year) {
         ) {
           cell.classList.add("bg-success");
         }
+
         cell.append(cellText);
         row.append(cell);
 
         date++;
       }
-
-      let startNextMonth = new Date(year, month + 2, 1).getDate();
-      cellText = document.createTextNode(startNextMonth);
-
-      if (date > new Date(year, month + 1, 0).getDate()) {
-        date = 1;
-      }
-
-      if (i > 2 && date > 1 && date < 16) {
+       
+      if (date - 1 > new Date(year, month + 1, 0).getDate()) {
+        cell.innerHTML = ""
+        cellText = document.createTextNode(newDate++);
+        cell.append(cellText);
         cell.classList.add("text-muted"); // styling days next month
       }
+      
+      // ------------------ Selected element--------------
+      let td = document.querySelectorAll("td");
+      // cell.addEventListener("click", function () {
+      //   // this.classList.toggle("selected");
+      //   if(this.classList.contains("selected")){
+      //     this.classList.remove("selected");
+      //   } else {
+      //     this.classList.add("selected");
+      //   }
+      // });
+
+      
+      // for (let i = 0; i < td.length; i++) {
+      //   td[i].addEventListener("click", function () {
+      //     // this.classList.toggle("selected");
+      //     if(td[i].classList.contains("selected")){
+      //       td[i].classList.remove("selected");
+      //     } else {
+      //       this.classList.add("selected");
+      //     }
+      //   });
+      // }
+      //-------------------------------------------------
     }
 
     table.append(row);
