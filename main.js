@@ -11,6 +11,15 @@ const currentDate = document.querySelector(".date");
 
 const daysEng = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
 const daysUa = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Нд"];
+const week = [
+  "Понеділок",
+  "Вівторок",
+  "Середа",
+  "Четвер",
+  "П'ятниця",
+  "Субота",
+  "Неділя",
+];
 const monthsEng = [
   "JAN",
   "FEB",
@@ -69,7 +78,7 @@ function clock() {
   currentDate.innerHTML =
     currentDay + " " + months[currentMonth] + " " + currentYear + " р.";
 }
-setInterval(clock, 1000);
+setInterval(clock, 1000); // set timeout рекурсивний
 clock();
 
 showCalendar(currentMonth, currentYear);
@@ -119,6 +128,7 @@ function showCalendar(month, year) {
     let row = document.createElement("tr");
     for (let j = 0; j < 7; j++) {
       cell = document.createElement("td");
+
       if (i === 0 && j < firstDay) {
         row.append(cell);
         cellText = document.createTextNode(endPrevMonth++);
@@ -136,42 +146,49 @@ function showCalendar(month, year) {
 
         cell.append(cellText);
         row.append(cell);
-
         date++;
       }
-       
+
       if (date - 1 > new Date(year, month + 1, 0).getDate()) {
-        cell.innerHTML = ""
+        cell.innerHTML = "";
         cellText = document.createTextNode(newDate++);
         cell.append(cellText);
         cell.classList.add("text-muted"); // styling days next month
       }
-      
-      // ------------------ Selected element--------------
-      let td = document.querySelectorAll("td");
-      // cell.addEventListener("click", function () {
-      //   // this.classList.toggle("selected");
-      //   if(this.classList.contains("selected")){
-      //     this.classList.remove("selected");
-      //   } else {
-      //     this.classList.add("selected");
-      //   }
-      // });
-
-      
-      // for (let i = 0; i < td.length; i++) {
-      //   td[i].addEventListener("click", function () {
-      //     // this.classList.toggle("selected");
-      //     if(td[i].classList.contains("selected")){
-      //       td[i].classList.remove("selected");
-      //     } else {
-      //       this.classList.add("selected");
-      //     }
-      //   });
-      // }
-      //-------------------------------------------------
     }
 
     table.append(row);
   }
+  // ------------------ Selected element--------------
+  let displaySelectedDay = document.querySelector(".select__day");
+  displaySelectedDay.innerHTML = "Сьогодні";
+
+  let td = document.getElementsByTagName("td");
+  for (let i = 0; i < td.length; i++) {
+    td[i].onclick = function () {
+      for (let j = 0; j < td.length; j++) {
+        td[j].classList.remove("selected");
+      }
+      this.classList.add("selected");
+      if (
+        +this.innerHTML === today.getDate() &&
+        year === today.getFullYear() &&
+        month === today.getMonth()
+      ) {
+        displaySelectedDay.innerHTML = "Сьогодні";
+      } else {
+        displaySelectedDay.innerHTML = week[i] + " " + this.innerHTML;
+      }
+      if (i >= 7) {
+        i = i % 7;
+        displaySelectedDay.innerHTML = week[i] + " " + this.innerHTML;
+      }
+    };
+  }
+  // $('td').on('click', function() { // то саме на jq
+  //   	$('td').removeClass('selected');
+  //     $(this).addClass('selected');
+  //   });
+
+  //-------------------------------------------------
 }
