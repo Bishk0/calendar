@@ -141,7 +141,7 @@ function showCalendar(month, year) {
           year === today.getFullYear() &&
           month === today.getMonth()
         ) {
-          cell.classList.add("bg-success");
+          cell.classList.add("bg-success", "selected");
         }
 
         cell.append(cellText);
@@ -182,13 +182,15 @@ function showCalendar(month, year) {
       if (i >= 7) {
         i = i % 7;
         displaySelectedDay.innerHTML = week[i] + " " + this.innerHTML;
+        if (
+          +this.innerHTML === today.getDate() &&
+          year === today.getFullYear() &&
+          month === today.getMonth()
+        ) {
+          displaySelectedDay.innerHTML = "Сьогодні";
+        }
       }
     };
   }
-  // $('td').on('click', function() { // то саме на jq
-  //   	$('td').removeClass('selected');
-  //     $(this).addClass('selected');
-  //   });
-
   //-------------------------------------------------
 }

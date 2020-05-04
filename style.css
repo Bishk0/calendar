@@ -31,19 +31,23 @@ table {
   /* border: 1px solid gray; */
   text-align: center;
   cursor: default;
+  border-spacing: 7px;
+  border-collapse: separate;
 }
 
 td, th {
   /* border: 1px solid magenta; */
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
 }
 
 td {
   font-size: 18px;
+  
+  
 }
 td:hover {
-  outline: solid 2px #f0f0f0;
+  outline: solid 2px blue;
 }
 
 .selected {
@@ -53,4 +57,19 @@ td:hover {
 .select__day {
   text-align: center;
   font-size: 20px;
+}
+
+.remindingOrEvent {
+  text-align: center;
+}
+
+.remindingOrEvent input {
+  width: 300px;
+  font-size: 18px;
+  padding: 5px 10px;
+  border: 1px solid grey;
+}
+
+.remindingOrEvent input:hover {
+  background-color: #f0f0f0;
 }
