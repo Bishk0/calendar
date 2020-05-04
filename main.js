@@ -75,8 +75,11 @@ function clock() {
   document.querySelector(".time").innerHTML =
     hours + ":" + minutes + ":" + seconds;
 
+    let month = today.getMonth();
+    let year = today.getFullYear();
+
   currentDate.innerHTML =
-    currentDay + " " + months[currentMonth] + " " + currentYear + " р.";
+    currentDay + " " + months[month] + " " + year + " р.";
 }
 setInterval(clock, 1000); // set timeout рекурсивний
 clock();
